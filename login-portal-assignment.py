@@ -71,7 +71,7 @@ elif command == "register":
                 user1['balance'] -= verification_fee
                 user1['is_verified'] = True
                 print("Account verified successfully.")
-                print(user)
+                print(user1)
             else:
                 print(f"Insufficient balance. You have NGN{user['balance']} but NGN1500 is required.")
 
