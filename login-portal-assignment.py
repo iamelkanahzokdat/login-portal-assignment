@@ -48,3 +48,42 @@ elif command == "register":
     user_name = input("Create a username: ")
     password = input("Create a password: ")
     balance = float(input("Enter balance: "))
+    is_verified = False
+
+    if len(users_db) > 0 and users_db[0]['name'] == user_name:
+        print("Username exists already")
+    else:
+        user2 = {
+            'name': user_name,
+            'password': password,
+            'balance': balance,
+            'is_verified': is_verified
+        }
+        users_db.append(user2)
+        print("Registration successful!")
+        print(user2)
+
+        # Verification prompt only after registration
+        verify = input("Would you like to verify your account for NGN1500? (yes/no): ").strip().lower()
+        verification_fee = 15000
+        if verify == "yes":
+            if user1['balance'] >= verification_fee:
+                user1['balance'] -= verification_fee
+                user1['is_verified'] = True
+                print("Account verified successfully.")
+                print(user)
+            else:
+                print(f"Insufficient balance. You have NGN{user['balance']} but NGN1500 is required.")
+
+        if verify == "no":
+            if user1['balance'] >= verification_fee:
+                user1['is_verified'] = False
+                print("Login Successfull")
+                print(user1)
+        
+            else:
+               if verify not in ["verify"]:
+                  print("Invalid command.")
+                  quit()
+
+
