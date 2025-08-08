@@ -77,7 +77,7 @@ if command == "login":
     user_name = input("Enter your name:\n")
     password = input("Enter your Password: ")
 
-    # Check first user
+   
     if len(users_db) >= 1 and user_name == users_db[0]['name']:
         if password == users_db[0]['password']:
             print("Login successful!")
@@ -85,7 +85,7 @@ if command == "login":
         else:
             print("Wrong password.")
 
-    # Check second user
+
     elif len(users_db) >= 2 and user_name == users_db[1]['name']:
         if password == users_db[1]['password']:
             print("Login successful!")
@@ -106,22 +106,17 @@ elif command == "register":
     if len(users_db) > 0 and users_db[0]['name'] == user_name:
         print("Username exists already")
     else:
-        user2 = {
-            'name': user_name,
-            'password': password,
-            'balance': balance,
-            'is_verified': is_verified
-        }
+        user2= {'name': user_name,'password': password,'balance': balance,'is_verified': is_verified}
         users_db.append(user2)
         print("Registration successful!")
         print(user2)
 
         # Verification prompt only after registration
         verify = input("Would you like to verify your account for NGN1500? (yes/no): ").strip().lower()
-        verification_fee = 15000
+        verification_fee = 1500
         if verify == "yes":
-            if user1['balance'] >= verification_fee:
-                user1['balance'] -= verification_fee
+            if user2['balance'] >= verification_fee:
+                user2['balance'] -= verification_fee
                 user2['is_verified'] = True
                 print("Account verified successfully.")
                 print(user2)
@@ -129,12 +124,11 @@ elif command == "register":
                 print(f"Insufficient balance. You have NGN{user1['balance']} but NGN1500 is required.")
 
         if verify == "no":
-            if user1['balance'] >= verification_fee:
-                user1['is_verified'] = False
+                user2['is_verified'] = False
                 print("Login Successfull")
                 print(user2)
         
-            else:
-               if verify not in ["verify"]:
+        else:
+            if verify not in ["verify"]:
                   print("Invalid command.")
                   quit()
